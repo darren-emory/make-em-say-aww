@@ -24,8 +24,10 @@ function Slideshow() {
 
   useEffect(() => {
     fetchImg();
+  }, []);
 
-    const timeout = setTimeout(nextImg, 2000);
+  useEffect(() => {
+    const timeout = setTimeout(nextImg, 4000);
     return () => {
       clearTimeout(timeout);
     };
@@ -38,7 +40,7 @@ function Slideshow() {
         return (
           <div>
             <Slide
-              classes={"slide " + (i === activeImg ? "active" : "")}
+              classes={"slide" + (i === activeImg ? " active" : "")}
               key={i}
               imgPath={slide.url}
               delay="5000"

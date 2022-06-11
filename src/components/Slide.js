@@ -8,7 +8,8 @@ function Slide(props) {
         backgroundSize: "cover",
         backgroundImage: `url(${props.imgPath})`,
         backgroundPosition: "50% 50%",
-        display: "flex",
+        position: "absolute",
+        display: "block",
         width: "100vw",
         height: "100vh",
       }}
