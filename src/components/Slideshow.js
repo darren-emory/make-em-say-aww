@@ -1,7 +1,6 @@
 import Slide from "./Slide";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { act } from "react-dom/test-utils";
 
 function Slideshow() {
   const [allImg, setAllImg] = useState([]);
@@ -18,22 +17,22 @@ function Slideshow() {
     });
   };
 
+  useEffect(() => {
+    fetchImg();
+  }, []);
+
   const nextImg = () => {
     setActiveImg(activeImg + 1);
   };
 
   useEffect(() => {
-    fetchImg();
-  }, []);
-
-  useEffect(() => {
     const timeout = setTimeout(nextImg, 4000);
+
     return () => {
       clearTimeout(timeout);
     };
   }, [activeImg]);
 
-  // useEffect setInterval to go thru array and fade out one at a time
   return (
     <div className="slideContainer">
       {allImg.map((slide, i) => {
