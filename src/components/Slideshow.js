@@ -18,13 +18,18 @@ function Slideshow() {
     });
   };
 
+  const nextImg = () => {
+    setActiveImg(activeImg + 1);
+  };
+
   useEffect(() => {
     fetchImg();
 
-    // setTimeout(() => {
-    //   setActiveImg = activeImg + 1;
-    // }, 3000);
-  }, []);
+    const timeout = setTimeout(nextImg, 2000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [activeImg]);
 
   // useEffect setInterval to go thru array and fade out one at a time
   return (
@@ -32,7 +37,6 @@ function Slideshow() {
       {allImg.map((slide, i) => {
         return (
           <div>
-            {console.log(i)}
             <Slide
               classes={"slide " + (i === activeImg ? "active" : "")}
               key={i}
