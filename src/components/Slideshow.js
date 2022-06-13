@@ -11,7 +11,6 @@ function Slideshow(props) {
         axios({
           method: "get",
           url: `https://api.thecatapi.com/v1/images/search?limit=3`,
-          // url: `https://dog.ceo/api/breed/corgi/cardigan/images/random/20`, > res.data.message > {slide}
           // header: {
           //   api_key: process.env.REACT_APP_cat_api_key,
           // },
