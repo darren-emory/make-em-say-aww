@@ -50,7 +50,12 @@ function Slideshow(props) {
   }, []);
 
   const nextImg = () => {
-    setActiveImg(activeImg + 1);
+    if (allImg.length - 1 === activeImg && activeImg !== 0) {
+      console.log(allImg.length, activeImg);
+      setActiveImg(0);
+    } else {
+      setActiveImg(activeImg + 1);
+    }
   };
 
   useEffect(() => {
