@@ -26,6 +26,22 @@ function Slideshow(props) {
           setAllImg(res.data.message);
         });
         break;
+      case "golden-retriever":
+        axios({
+          method: "get",
+          url: `https://dog.ceo/api/breed/retriever/golden/images/random/10`,
+        }).then((res) => {
+          setAllImg(res.data.message);
+        });
+        break;
+      case "huskys":
+        axios({
+          method: "get",
+          url: `https://dog.ceo/api/breed/husky/images/random/10`,
+        }).then((res) => {
+          setAllImg(res.data.message);
+        });
+        break;
     }
   };
 

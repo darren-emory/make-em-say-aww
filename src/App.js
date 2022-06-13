@@ -11,6 +11,10 @@ function App() {
         <>
           <button onClick={() => setPlaySlideshow("cats")}>CATS</button>
           <button onClick={() => setPlaySlideshow("corgis")}>CORGIS</button>
+          <button onClick={() => setPlaySlideshow("golden-retriever")}>
+            GOLDEN RETRIEVERS
+          </button>
+          <button onClick={() => setPlaySlideshow("huskys")}>HUSKYS</button>
         </>
       )}
     </div>
