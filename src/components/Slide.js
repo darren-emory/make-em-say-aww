@@ -4,6 +4,7 @@ function Slide(props) {
       className={props.classes}
       style={{
         backgroundSize: "cover",
+        backgroundColor: "black",
         backgroundImage: `url(${props.imgPath})`,
         backgroundPosition: "50% 50%",
         position: "absolute",
