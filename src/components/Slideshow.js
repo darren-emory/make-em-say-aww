@@ -1,11 +1,10 @@
 // unloaded: scrolling background image of cute images, title, icons to begin slideshow, option for playing music, credits/info
-// need a loading state with icon
-// loaded: sound icon muted/unmuted/ back button to go back to first state
-//
+// need loading icon
 
 import Slide from "./Slide";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Slideshow(props) {
   const [allImg, setAllImg] = useState([]);
@@ -28,46 +27,54 @@ function Slideshow(props) {
               const img = new Image();
               img.src = obj.url;
             });
-            res.data.unshift({ url: "../img/placeholder.gif" });
           });
           break;
         case "corgis":
           await axios({
             method: "get",
-            url: `https://dog.ceo/api/breed/corgi/cardigan/images/random/5`,
+            url: `https://dog.ceo/api/breed/corgi/cardigan/images/random/10`,
           }).then((res) => {
             setAllImg(res.data.message);
             res.data.message.forEach((obj) => {
               const img = new Image();
               img.src = obj;
             });
-            res.data.message.unshift("../img/placeholder.gif");
+          });
+          break;
+        case "dachshund":
+          await axios({
+            method: "get",
+            url: `https://dog.ceo/api/breed/dachshund/images/random/10`,
+          }).then((res) => {
+            setAllImg(res.data.message);
+            res.data.message.forEach((obj) => {
+              const img = new Image();
+              img.src = obj;
+            });
           });
           break;
         case "golden-retriever":
           await axios({
             method: "get",
-            url: `https://dog.ceo/api/breed/retriever/golden/images/random/5`,
+            url: `https://dog.ceo/api/breed/retriever/golden/images/random/10`,
           }).then((res) => {
             setAllImg(res.data.message);
             res.data.message.forEach((obj) => {
               const img = new Image();
               img.src = obj;
             });
-            res.data.message.unshift("../img/placeholder.gif");
           });
           break;
         case "huskys":
           await axios({
             method: "get",
-            url: `https://dog.ceo/api/breed/husky/images/random/5`,
+            url: `https://dog.ceo/api/breed/husky/images/random/10`,
           }).then((res) => {
             setAllImg(res.data.message);
             res.data.message.forEach((obj) => {
               const img = new Image();
               img.src = obj;
             });
-            res.data.message.unshift("../img/placeholder.gif");
           });
           break;
       }
@@ -89,32 +96,39 @@ function Slideshow(props) {
 
   useEffect(() => {
     let timeoutDuration = 4000;
-    if (activeImg === 0) timeoutDuration = 3000;
-
     const timeout = setTimeout(nextImg, timeoutDuration);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [activeImg]);
+  });
 
   return (
     <div className="slideContainer">
-      {imgsLoaded ? (
-        <>
-          {allImg.map((slide, i) => {
-            return (
-              <Slide
-                classes={"slide" + (i === activeImg ? " active" : "")}
-                key={i}
-                imgPath={props.show === "cats" ? slide.url : slide}
-              />
-            );
-          })}
-        </>
-      ) : (
-        <></>
-      )}
+      <AnimatePresence>
+        {imgsLoaded ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            {allImg.map((slide, i) => {
+              return (
+                <Slide
+                  classes={"slide" + (i === activeImg ? " active" : "")}
+                  key={i}
+                  imgPath={props.show === "cats" ? slide.url : slide}
+                />
+              );
+            })}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="loader"
+            initial={{ opacity: 0, y: 200 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            <h2 style={{ color: "white", position: "absolute" }}>Loading...</h2>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
