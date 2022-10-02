@@ -83,7 +83,7 @@ function Slideshow(props) {
     axiosRequest();
     setTimeout(() => {
       setImgsLoaded(true);
-    }, 1000);
+    }, 2500);
   }, []);
 
   const nextImg = () => {
