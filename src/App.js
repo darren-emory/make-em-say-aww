@@ -18,7 +18,14 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        justifyContent: "flex-start",
+        alignContent: "flex-end",
+      }}
+    >
       <audio
         src="../audio/Monkeys_Spinning_Monkeys.ogg"
         ref={audioRef}
@@ -26,8 +33,41 @@ function App() {
       />
       {playSlideshow !== "none" ? (
         <>
-          <button onClick={() => setPlaySlideshow("none")}>Back</button>
-          <button onClick={handlePlayMusic}>{playAudio}</button>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 20,
+            }}
+          >
+            <button
+              style={{
+                backgroundColor: "white",
+                border: "none",
+                boxShadow: "none",
+                opacity: "0.8",
+                padding: 10,
+                cursor: "pointer",
+              }}
+              onClick={() => setPlaySlideshow("none")}
+            >
+              Back
+            </button>
+            <button
+              style={{
+                backgroundColor: "white",
+                border: "none",
+                boxShadow: "none",
+                opacity: "0.8",
+                padding: 10,
+                cursor: "pointer",
+              }}
+              onClick={handlePlayMusic}
+            >
+              {playAudio}
+            </button>
+          </div>
           <Slideshow show={playSlideshow} />
         </>
       ) : (

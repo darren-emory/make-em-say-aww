@@ -9,8 +9,8 @@ function Slide(props) {
         backgroundPosition: "50% 50%",
         position: "absolute",
         display: "block",
-        width: "100vw",
-        height: "100vh",
+        width: "50vw",
+        height: "50vh",
       }}
     ></div>
   );
